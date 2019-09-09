@@ -1,0 +1,76 @@
+// Network flow
+digraph {
+	node [color=black]
+	"ptgs2 -1 0.31"
+	node [color=green]
+	"endopeptidase activity 1008 0.02"
+	node [color=yellow]
+	"immune reconstitution inflammatory syndrome 3305 1.00"
+	node [color=green]
+	"acute inflammatory response 4391 0.31"
+	node [color=green]
+	"regulation of inflammatory response 87 0.58"
+	node [color=yellow]
+	"inflammatory myopathy 4556 1.00"
+	node [color=yellow]
+	"pelvic inflammatory disease 9456 1.00"
+	node [color=black]
+	"klkb1 256 0.02"
+	node [color=green]
+	"response to corticosteroid 851 0.31"
+	node [color=black]
+	"lep -1 0.17"
+	node [color=black]
+	"ahsg -1 0.31"
+	node [color=black]
+	"nlrp12 383 1.93e-03"
+	node [color=black]
+	"ffar2 198 0.03"
+	node [color=black]
+	"adipoq 3750 0.31"
+	node [color=black]
+	"ido1 1538 0.16"
+	node [color=yellow]
+	"neurogenic inflammation 4053 1.00"
+	node [color=yellow]
+	"chronic inflammatory demyelinating polyneuropathy 7988 1.00"
+	node [color=green]
+	"t cell activation -1 0.17"
+	node [color=black]
+	"park7 793 0.03"
+	node [color=green]
+	"cytokine production -1 0.16"
+	node [color=yellow]
+	"increased inflammatory response 479 1.00"
+	node [color=black]
+	"gstp1 -1 0.31"
+	node [color=green]
+	"inflammatory response -1 0.03"
+	"acute inflammatory response 4391 0.31" -> "ahsg -1 0.31" [label="PPI:function->gene(0.31)"]
+	"endopeptidase activity 1008 0.02" -> "klkb1 256 0.02" [label="PPI:function->gene(0.02)"]
+	"inflammatory response -1 0.03" -> "ffar2 198 0.03" [label="PPI:function->gene(0.03)"]
+	"inflammatory response -1 0.03" -> "park7 793 0.03" [label="PPI:function->gene(0.03)"]
+	"response to corticosteroid 851 0.31" -> "ptgs2 -1 0.31" [label="PPI:function->gene(0.31)"]
+	"response to corticosteroid 851 0.31" -> "gstp1 -1 0.31" [label="PPI:function->gene(0.31)"]
+	"response to corticosteroid 851 0.31" -> "adipoq 3750 0.31" [label="PPI:function->gene(0.31)"]
+	"cytokine production -1 0.16" -> "ido1 1538 0.16" [label="PPI:function->gene(0.16)"]
+	"t cell activation -1 0.17" -> "lep -1 0.17" [label="PPI:function->gene(0.17)"]
+	"pelvic inflammatory disease 9456 1.00" -> "acute inflammatory response 4391 0.31" [label="deep:disease->function(1.00)"]
+	"neurogenic inflammation 4053 1.00" -> "acute inflammatory response 4391 0.31" [label="deep:disease->function(1.00)"]
+	"increased inflammatory response 479 1.00" -> "acute inflammatory response 4391 0.31" [label="deep:disease->function(1.00)"]
+	"neurogenic inflammation 4053 1.00" -> "endopeptidase activity 1008 0.02" [label="deep:disease->function(1.00)"]
+	"neurogenic inflammation 4053 1.00" -> "inflammatory response -1 0.03" [label="deep:disease->function(1.00)"]
+	"regulation of inflammatory response 87 0.58" -> "nlrp12 383 1.93e-03" [label="database:function->gene(2.00)"]
+	"immune reconstitution inflammatory syndrome 3305 1.00" -> "response to corticosteroid 851 0.31" [label="deep:disease->function(1.00)"]
+	"inflammatory myopathy 4556 1.00" -> "response to corticosteroid 851 0.31" [label="deep:disease->function(1.00)"]
+	"pelvic inflammatory disease 9456 1.00" -> "response to corticosteroid 851 0.31" [label="deep:disease->function(1.00)"]
+	"chronic inflammatory demyelinating polyneuropathy 7988 1.00" -> "response to corticosteroid 851 0.31" [label="deep:disease->function(1.00)"]
+	"immune reconstitution inflammatory syndrome 3305 1.00" -> "cytokine production -1 0.16" [label="deep:disease->function(1.00)"]
+	"chronic inflammatory demyelinating polyneuropathy 7988 1.00" -> "cytokine production -1 0.16" [label="deep:disease->function(1.00)"]
+	"immune reconstitution inflammatory syndrome 3305 1.00" -> "t cell activation -1 0.17" [label="deep:disease->function(1.00)"]
+	"inflammatory myopathy 4556 1.00" -> "t cell activation -1 0.17" [label="deep:disease->function(1.00)"]
+	"chronic inflammatory demyelinating polyneuropathy 7988 1.00" -> "t cell activation -1 0.17" [label="deep:disease->function(1.00)"]
+	"pelvic inflammatory disease 9456 1.00" -> "regulation of inflammatory response 87 0.58" [label="deep:disease->function(1.00)"]
+	"acute inflammatory response 4391 0.31" -> "regulation of inflammatory response 87 0.58" [label="deep:function->function(2.00)"]
+	"increased inflammatory response 479 1.00" -> "regulation of inflammatory response 87 0.58" [label="deep:disease->function(1.00)"]
+}
