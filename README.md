@@ -11,11 +11,11 @@ Deep Functional Synthesis (DeepSyn) is function annotation tool that moves beyon
 
 ## Dataset
 We provide a sample dataset in [figshare](https://figshare.com/projects/DeepSyn_Deep_functional_synthesis_a_machine_learning_approach_to_gene_function_enrichment/69380), including
-(1) the knowledge graph used in the paper
-(2) all the raw data used to generate the knowledge graph except for the scientific paper abstracts (i.e., PubMed)
-(3) new phrases mined by using AutoPhrase
-(4) co-occured phrase networks mined from PubMed (so you don't need to download PubMed raw data)
-(5) CNN-based phrase networks mined from PubMed
+* (1) the knowledge graph used in the paper
+* (2) all the raw data used to generate the knowledge graph except for the scientific paper abstracts (i.e., PubMed)
+* (3) new phrases mined by using AutoPhrase
+* (4) co-occured phrase networks mined from PubMed (so you don't need to download PubMed raw data)
+* (5) CNN-based phrase networks mined from PubMed
 
 By using (1), it would be enough for all functions in our tool.
 If you want to create your own knowledge graph or replicate our results, you can use (2), (3), (4), and (5) to do it.
