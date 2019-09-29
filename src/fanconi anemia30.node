@@ -1,34 +1,36 @@
 node	type	type	gene_score
-sugar alcohols	mesh_drug	0.0	0.0
-etiocholanolone	mesh_drug	0.0	0.0
-vascular endothelial growth factors	mesh_drug	0.0	0.0
-diazinon	mesh_drug	0.0	0.0
+disaccharidases	mesh_drug	0.0	0.0
+organic anion transporters	mesh_drug	0.0	0.0
+cell culture techniques	mesh_drug	0.0	0.0
+gliclazide	mesh_drug	0.0	0.0
+arylalkylamine n-acetyltransferase	mesh_drug	0.0	0.0
+cyanamide	mesh_drug	0.0	0.0
+cefsulodin	mesh_drug	0.0	0.0
+flame retardants	mesh_drug	0.0	0.0
+tars	mesh_drug	0.01208345732139996	0.01208345732139996
+intradermal tests	mesh_drug	0.0	0.0
+muramidase	mesh_drug	0.0	0.0
+galectin 3	mesh_drug	0.0	0.0
+peptidylprolyl isomerase	mesh_drug	0.0	0.0
+phosphines	mesh_drug	0.0	0.0
+xpa	CCLE_gene	1	1
+glucose-6-phosphate isomerase	mesh_drug	0.0	0.0
+polyenes	mesh_drug	0.0	0.0
+loxapine	mesh_drug	0.0	0.0
+epitestosterone	mesh_drug	0.0	0.0
+cefotetan	mesh_drug	0.0	0.0
+rhinomanometry	mesh_drug	0.0	0.0
+calcium sulfate	mesh_drug	0.0	0.0
+pemoline	mesh_drug	0.0	0.0
 sptan1	CCLE_gene	1	1
-acta1	monarch_gene	0.003278688524590164	0.003278688524590164
-pyrazoles	mesh_drug	0.0	0.0
-two-dimensional difference gel electrophoresis	mesh_drug	0.0	0.0
-sorbose	mesh_drug	0.0	0.0
-thymopentin	mesh_drug	0.0	0.0
-belinostat	ctrp_drug	0.0	0.0
-guaiac	mesh_drug	0.0	0.0
-cediranib	ctrp_drug	0.0	0.0
-bentonite	mesh_drug	0.0	0.0
-propanidid	mesh_drug	0.0	0.0
-drug administration schedule	mesh_drug	0.0	0.0
-apolipoprotein e4	mesh_drug	0.0	0.0
-ergonovine	mesh_drug	0.0	0.0
-ethoxyquin	mesh_drug	0.0	0.0
-ligase chain reaction	mesh_drug	0.0	0.0
-brca1	CCLE_gene	1.0040816326530613	1.0040816326530613
-metaproterenol	mesh_drug	0.0	0.0
-myeloma proteins	mesh_drug	0.0	0.0
-galactose oxidase	mesh_drug	0.0	0.0
-xanthines	mesh_drug	0.0	0.0
-tars	mesh_drug	1.0040816326530613	1.0040816326530613
-almitrine	mesh_drug	0.0	0.0
-jejunoileal bypass	mesh_drug	0.0	0.0
-agrochemicals	mesh_drug	0.0	0.0
-phosphatidate phosphatase	mesh_drug	0.0	0.0
-microspectrophotometry	mesh_drug	0.0	0.0
-suture techniques	mesh_drug	0.0	0.0
-methoxychlor	mesh_drug	0.0	0.0
+fancd2	CCLE_gene	1.0063291139240507	1.0063291139240507
+sodium glutamate	mesh_drug	0.0	0.0
+lymphotoxin-beta	mesh_drug	0.0	0.0
+urinary catheters	mesh_drug	0.0	0.0
+acridines	mesh_drug	0.0	0.0
+organic chemicals	mesh_drug	0.0	0.0
+vorapaxar	ctrp_drug	0.0	0.0
+eed	CCLE_gene	0.009647860131704409	0.009647860131704409
+trimethaphan	mesh_drug	0.0	0.0
+traf6	CCLE_gene	0.01208345732139996	0.01208345732139996
+nicotinamide phosphoribosyltransferase	mesh_drug	0.0	0.0
