@@ -1,0 +1,34 @@
+node	type	type	gene_score
+sugar alcohols	mesh_drug	0.0	0.0
+etiocholanolone	mesh_drug	0.0	0.0
+vascular endothelial growth factors	mesh_drug	0.0	0.0
+diazinon	mesh_drug	0.0	0.0
+sptan1	CCLE_gene	1	1
+acta1	monarch_gene	0.003278688524590164	0.003278688524590164
+pyrazoles	mesh_drug	0.0	0.0
+two-dimensional difference gel electrophoresis	mesh_drug	0.0	0.0
+sorbose	mesh_drug	0.0	0.0
+thymopentin	mesh_drug	0.0	0.0
+belinostat	ctrp_drug	0.0	0.0
+guaiac	mesh_drug	0.0	0.0
+cediranib	ctrp_drug	0.0	0.0
+bentonite	mesh_drug	0.0	0.0
+propanidid	mesh_drug	0.0	0.0
+drug administration schedule	mesh_drug	0.0	0.0
+apolipoprotein e4	mesh_drug	0.0	0.0
+ergonovine	mesh_drug	0.0	0.0
+ethoxyquin	mesh_drug	0.0	0.0
+ligase chain reaction	mesh_drug	0.0	0.0
+brca1	CCLE_gene	1.0040816326530613	1.0040816326530613
+metaproterenol	mesh_drug	0.0	0.0
+myeloma proteins	mesh_drug	0.0	0.0
+galactose oxidase	mesh_drug	0.0	0.0
+xanthines	mesh_drug	0.0	0.0
+tars	mesh_drug	1.0040816326530613	1.0040816326530613
+almitrine	mesh_drug	0.0	0.0
+jejunoileal bypass	mesh_drug	0.0	0.0
+agrochemicals	mesh_drug	0.0	0.0
+phosphatidate phosphatase	mesh_drug	0.0	0.0
+microspectrophotometry	mesh_drug	0.0	0.0
+suture techniques	mesh_drug	0.0	0.0
+methoxychlor	mesh_drug	0.0	0.0
