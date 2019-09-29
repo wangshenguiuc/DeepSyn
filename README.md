@@ -18,10 +18,12 @@ We provide a sample dataset in [figshare](https://figshare.com/projects/DeepSyn_
 * (5) CNN-based phrase networks mined from PubMed
 
 By using (1), it would be enough for all functions in our tool.
+
 If you want to create your own knowledge graph or replicate our results, you can use (2), (3), (4), and (5) to do it.
 
 ## How to run
 DeepSyn supports queried in four different fields: drug, gene, function, and disease.
+
 Users can give arbitary number of terms in any of these four fields.
 DeepSyn will then return an answer graph for this query.
 
@@ -34,8 +36,8 @@ python run_DeepSyn.py
 The resulted answer graph would be stored in network.txt in the format that can be read by [CytoScape](https://cytoscape.org/). If [graphviz](https://pypi.org/project/graphviz/) is installed, a graph will be generated in network.pdf
 
 ## Prerequisite
-python 3.6 (with slight modification, python 2.7 can also be used to run our tool)
-python packages (numpy 1.14+, scipy 1.1+, networkx 2.3+)
+* python 3.6 (with slight modification, python 2.7 can also be used to run our tool)
+* python packages (numpy 1.14+, scipy 1.1+, networkx 2.3+)
 
 ## Questions
 For questions about the data and code, please contact swang91@stanford.edu. We will do our best to provide support and address any issues. We appreciate your feedback!
