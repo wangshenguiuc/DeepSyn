@@ -33,9 +33,9 @@ python run_DeepSyn.py
 ```
 The resulted answer graph would be stored in network.txt in the format that can be read by [CytoScape](https://cytoscape.org/). If [graphviz](https://pypi.org/project/graphviz/) is installed, a graph will be generated in network.pdf
 
-##Prerequisite
+## Prerequisite
 python 3.6 (with slight modification, python 2.7 can also be used to run our tool)
 python packages (numpy 1.14+, scipy 1.1+, networkx 2.3+)
 
-##Questions
+## Questions
 For questions about the data and code, please contact swang91@stanford.edu. We will do our best to provide support and address any issues. We appreciate your feedback!
