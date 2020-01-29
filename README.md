@@ -9,17 +9,9 @@ Deep Functional Synthesis (DeepSyn) is function annotation tool that moves beyon
 **Deep functional synthesis: a machine learning approach to gene function enrichment**.
 *Sheng Wang, Jianzhu Ma, Samson Fong, Stefano Rensi, Jiawei Han, Jian Peng, Dexter Pratt, Russ B. Altman, Trey Ideker*.
 
-## Dataset
-We provide a sample dataset in [figshare](https://figshare.com/projects/DeepSyn_Deep_functional_synthesis_a_machine_learning_approach_to_gene_function_enrichment/69380), including
-* (1) the knowledge graph used in the paper
-* (2) all the raw data used to generate the knowledge graph except for the scientific paper abstracts (i.e., PubMed)
-* (3) new phrases mined by using AutoPhrase
-* (4) co-occured phrase networks mined from PubMed (so you don't need to download PubMed raw data)
-* (5) CNN-based phrase networks mined from PubMed
-
-By using (1), it would be enough for all functions in our tool.
-
-If you want to create your own knowledge graph or replicate our results, you can use (2), (3), (4), and (5) to do it.
+## Dataset (update on 01/27/2020)
+We now provide an updated dataset for our fast implementation in this [dropbox link](https://www.dropbox.com/s/ubkh36hqe8qqki0/deepsyn_data.tar.gz?dl=0).
+Please download this data, extract all files (tar -zxvf deepsyn_data.tar.gz) and change the data fold location in [run_deepsyn_fast.py](https://github.com/wangshenguiuc/DeepSyn/blob/master/run_deepsyn_fast.py).
 
 ## How to run
 DeepSyn supports queried in four different fields: drug, gene, function, and disease.
@@ -27,17 +19,15 @@ DeepSyn supports queried in four different fields: drug, gene, function, and dis
 Users can give arbitary number of terms in any of these four fields.
 DeepSyn will then return an answer graph for this query.
 
-First modify the src/configure.py and change DATA_DIR to where you store the dataset downloaded from [figshare](https://figshare.com/projects/DeepSyn_Deep_functional_synthesis_a_machine_learning_approach_to_gene_function_enrichment/69380).
-An example is in src/run_DeepSyn.py
+First modify the [run_deepsyn_fast.py](https://github.com/wangshenguiuc/DeepSyn/blob/master/run_deepsyn_fast.py) and change DATA_DIR to where you store the dataset downloaded from [dropbox link](https://www.dropbox.com/s/ubkh36hqe8qqki0/deepsyn_data.tar.gz?dl=0).
+An example is in run_deepsyn_fast.py
 ```
-cd src
-python run_DeepSyn.py
+python run_deepsyn_fast.py
 ```
-The resulted answer graph would be stored in network.txt in the format that can be read by [CytoScape](https://cytoscape.org/). If [graphviz](https://pypi.org/project/graphviz/) is installed, a graph will be generated in network.pdf
 
 ## Prerequisite
 * python 3.6 (with slight modification, python 2.7 can also be used to run our tool)
-* python packages (numpy 1.14+, scipy 1.1+, networkx 2.3+)
+* python packages (numpy 1.14+, scipy 1.1+)
 
 ## Questions
 For questions about the data and code, please contact swang91@stanford.edu. We will do our best to provide support and address any issues. We appreciate your feedback!
