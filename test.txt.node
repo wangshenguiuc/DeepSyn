@@ -1,39 +1,45 @@
 node	type
-transition metal ion binding	function
-regulation of transcription by rna polymerase ii	function
-psmb9	gene
-laryngeal cancer	disease
-ubc	gene
+nucleus	function
+indian population	function
+ion binding	function
+rbp3	gene
+hras	gene
+cbr1	gene
 magnesium ion binding	function
-kmt2a	gene
+courtship behavior	function
+abcb1	gene
+cops5	gene
+female breast cancer	function
+stk36	gene
+laryngeal cancer	disease
+stomach cancer	disease
+population genetic	function
+psmb9	gene
 lung cancer	function
+kmt2a	gene
+abcb5	gene
+hormesis	function
+ewsr1	gene
+efhc1	gene
+cellular response to stimulus	function
+catalytic activity	function
+daxx	gene
+breast cancer	disease
+protecting groups	function
+survival curve	function
 response to doxorubicin	function
 translesion synthesis	function
-obesity	function
 top2a	gene
-ywhae	gene
-gallbladder cancer	function
-topoisomerase ii alpha	function
-rna folding	function
-uterine cancer	disease
-curve analyses	function
-snca	gene
 estrogen receptor binding	function
-peritoneal mesothelioma	disease
-breast cancer	disease
-hereditary breast	function
-abcb1	gene
-doxorubicin	drug
-estrogen binding	function
-aggressive behavior	function
-survival curve	function
-translation	function
-trna binding	function
-hras	gene
-dna repair	function
-metal ion binding	function
-cell cycle	function
+proportional hazard	function
 brca1 mutation	function
-abcb5	gene
+doxorubicin	drug
+uterine cancer	disease
+dna repair	function
 creb3l1	gene
-cbr1	gene
+metal ion binding	function
+estrogen binding	function
+metal ion homeostasis	function
+topoisomerase ii alpha	function
+obesity	function
+aggressive behavior	function
