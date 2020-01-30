@@ -27,7 +27,7 @@ The following command runs the query for drug: [etoposide], disease: [breast can
 ```
 python run_deepsyn_fast.py \
 --data_dir "DeepSyn/data/knowledge_network/" \
---drug "doxorubicin" --disease "breast cancer;lung cancer" \
+--drug "doxorubicin" --disease "breast cancer;prostate cancer" \
 --gene "top2a;kmt2a" --function "dna repair" --output_file "test.txt"
 ```
 

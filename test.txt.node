@@ -1,45 +1,39 @@
 node	type
-nucleus	function
-indian population	function
-ion binding	function
-rbp3	gene
-hras	gene
-cbr1	gene
-magnesium ion binding	function
-courtship behavior	function
-abcb1	gene
-cops5	gene
-female breast cancer	function
-stk36	gene
-laryngeal cancer	disease
-stomach cancer	disease
-population genetic	function
-psmb9	gene
-lung cancer	function
-kmt2a	gene
-abcb5	gene
-hormesis	function
-ewsr1	gene
-efhc1	gene
-cellular response to stimulus	function
-catalytic activity	function
-daxx	gene
-breast cancer	disease
-protecting groups	function
-survival curve	function
+dna recombination	function
 response to doxorubicin	function
-translesion synthesis	function
-top2a	gene
-estrogen receptor binding	function
-proportional hazard	function
-brca1 mutation	function
+mapk1	gene
+breast cancer	disease
+nasopharyngeal cancer	disease
+female breast cancer	function
+stomach cancer	disease
+protein binding	function
+creb3l1	gene
+lung cancer	function
+obesity	function
+survival curve	function
+avp	gene
+impa1	gene
+dna binding	function
+abcb5	gene
+kras	gene
+tumor behavior	function
+gnpda2	gene
+ubc	gene
+proportional hazards	function
+kmt2a	gene
+psmb9	gene
+magnesium ion binding	function
+metal ion binding	function
+abcb1	gene
 doxorubicin	drug
 uterine cancer	disease
-dna repair	function
-creb3l1	gene
-metal ion binding	function
-estrogen binding	function
-metal ion homeostasis	function
+cbr1	gene
+estrogen receptor binding	function
 topoisomerase ii alpha	function
-obesity	function
+top2a	gene
+dna repair	function
+estrogen binding	function
+mammary gland development	function
+curve analyses	function
+cell cycle	function
 aggressive behavior	function
