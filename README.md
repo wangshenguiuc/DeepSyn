@@ -22,7 +22,6 @@ DeepSyn supports queried in four different fields: drug, gene, function, and dis
 Users can give arbitary number of terms in any of these four fields.
 DeepSyn will then return an answer graph for this query.  
 An example is in run_deepsyn_fast.py.  
-
 First download the dataset from [dropbox link](https://www.dropbox.com/s/ubkh36hqe8qqki0/deepsyn_data.tar.gz?dl=0).  
 The following command runs the query for drug: [etoposide], disease: [breast cancer, lung cancer], function: [dna repair], gene: [top2a; kmt2a]. data_dir will be the folder that you store the dataset downloaded from [dropbox link](https://www.dropbox.com/s/ubkh36hqe8qqki0/deepsyn_data.tar.gz?dl=0).
 ```
