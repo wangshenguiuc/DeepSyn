@@ -42,7 +42,7 @@ The graph will also be saved in text file by using the --output_file argument. T
 
 ## Prerequisite
 * python 3.6 (with slight modification, python 2.7 can also be used to run our tool)
-* python packages (numpy 1.14+, scipy 1.1+)
+* python packages (numpy 1.14+, scipy 1.1+, networkx 2.4+)
 
 ## Questions
 For questions about the data and code, please contact swang91@stanford.edu. We will do our best to provide support and address any issues. We appreciate your feedback!
