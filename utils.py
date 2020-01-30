@@ -11,9 +11,32 @@ import numpy as np
 from scipy import stats
 from scipy.sparse import isspmatrix
 from scipy.sparse import csr_matrix
+import networkx as nx
 
 layer_keys = ['drug', 'gene','function', 'disease']
 
+def create_networkx_obj(paths, nodes, node2tp):
+	G = nx.DiGraph()
+	for node in nodes:
+		G.add_node(node, type=node2tp[node])
+	for path in paths:
+		e1,e2,tp = path.split('\t')
+		G.add_edge(e1, e2, type=tp)
+	return G
+
+def write_to_cyto_scape(paths, nodes, node2tp, output_file):
+	fout = open(output_file+'.edge','w')
+	fout.write('source\ttarget\ttype\n')
+	for path in paths:
+		e1,e2,tp = path.split('\t')
+		fout.write(e1+'\t'+e2+'\t'+tp+'\n')
+	fout.close()
+
+	fout = open(output_file+'.node','w')
+	fout.write('node\ttype\n')
+	for n in nodes:
+		fout.write(n+'\t'+node2tp[n]+'\n')
+	fout.close()
 
 def extract_network(net_obj, ki, kj):
 	net = net_obj.bp_net
@@ -183,21 +206,16 @@ def term2termid(terms, n2i):
 	return term_ids
 
 def forward_search(dk, ki, kj, org_query, query, network_st_ed, network_st_mid, network_mid_ed, diffusion, diffusion_n2i, diffusion_i2n, node2tp, MAX_DEPTH, NNODES_PER_LAYER, NNODES_PER_QUERY):
-	print (dk, ki, kj)
 	starts = query[ki]
 	ends = query[kj]
 	terms = starts.copy()
 	terms.extend(ends)
-	print ('qkj',query[kj])
-	print ('starts',starts)
 	if len(starts) == 0 and len(query[kj]) != 0:
 		starts = find_ngh(network_st_ed, query[kj].copy(), ki, node2tp, topk=NNODES_PER_QUERY)
 		middles = query[kj].copy()
 	else:
 		middles = find_ngh(network_st_ed, starts, dk, node2tp, topk=NNODES_PER_QUERY)
-	print ('starts',starts)
-	print ('qki',query[ki])
-	print ('middles',middles)
+
 	middle_ids = term2termid(middles, diffusion_n2i[MAX_DEPTH][dk])
 
 	if len(middle_ids)==0 or len(org_query[ki])==0: # no diffusion
@@ -208,17 +226,10 @@ def forward_search(dk, ki, kj, org_query, query, network_st_ed, network_st_mid, 
 
 	diff_terms = np.unique(diff_terms)
 
-	print ('starts',starts)
-	print ('diff_terms',diff_terms,len(org_query[ki]),org_query[ki])
-	print ('ends',ends)
 	if set(diff_terms) == set(starts):
 		start_paths = set()
 	else:
-		print (ki,dk)
 		start_paths, diff_terms = search_path(network_st_mid, starts, diff_terms, max_depth=MAX_DEPTH, verbal=False)
-	print ('start_paths',start_paths)
-	print ('diff_terms',diff_terms)
-
 	depi = 0
 	if len(ends)>0:
 		end_paths = set()
@@ -232,8 +243,6 @@ def forward_search(dk, ki, kj, org_query, query, network_st_ed, network_st_mid, 
 		end_paths = set()
 		find_ends = diff_terms
 	path = start_paths | end_paths
-	print ('end_paths',end_paths)
-	print ('find_ends',ends)
 	return path, find_ends
 
 
@@ -258,10 +267,9 @@ def run_query(query, networks, diffusion, diffusion_n2i, diffusion_i2n, node2tp,
 				w1,w2,tp=p.split('\t')
 				layer_paths.add(w2+'\t'+w1+'\t'+tp)
 		paths = paths | layer_paths
-		print (next_layer_terms)
 		query[kj].extend(list(next_layer_terms))
 		query[kj] = list(np.unique(query[kj]))
-		print (query)
+
 
 	paths = list(paths)
 	nodes = set()
