@@ -11,9 +11,28 @@ import numpy as np
 from scipy import stats
 from scipy.sparse import isspmatrix
 from scipy.sparse import csr_matrix
+import pickle
 import networkx as nx
 
 layer_keys = ['drug', 'gene','function', 'disease']
+
+def remove_non_db_terms(query, tp2node):
+	new_query = {}
+	for key in query:
+		new_query[key] = []
+		value = query[key]
+		for v in value:
+			if v in tp2node[key]:
+				new_query[key].append(v)
+	return new_query
+
+def valid_query(query, tp2node):
+	for key in query:
+		value = query[key]
+		for v in value:
+			if v in tp2node[key]:
+				return True
+	return False
 
 def create_networkx_obj(paths, nodes, node2tp):
 	G = nx.DiGraph()
@@ -278,3 +297,144 @@ def run_query(query, networks, diffusion, diffusion_n2i, diffusion_i2n, node2tp,
 		nodes.add(w1)
 		nodes.add(w2)
 	return paths, nodes
+
+def read_node_info(DATA_DIR):
+
+	fin = open(DATA_DIR+'/node_info.txt')
+	info = {}
+	for line in fin:
+		w = line.strip().split('\t')
+		if len(w)<3:
+			continue
+		n,i,u=w
+		info[n] = [[n,i,u]]
+	fin.close()
+
+	with open(DATA_DIR+'/pid2term.pickle', 'rb') as handle:
+	    term2pid = pickle.load(handle)
+
+	return info, term2pid
+
+
+def ExtractSnippt(term, abst, lookahead = 20):
+	term = term.lower()
+	abst = abst.lower()
+	nword = len(term.split(' '))
+	tokens = abst.split(" ")  # Split string into a list of tokens
+	index = -1
+	for i in range(len(tokens)):
+		if ' '.join(tokens[i:i+nword]).replace('?','').replace(':','').replace(';','').replace(',','').replace('.','') \
+		== term.replace('?','').replace(':','').replace(';','').replace(',','').replace('.',''):
+			index = i
+			break
+	if index==-1:
+		return ' '.join(tokens[:min(len(tokens), lookahead*2)])+' ...'
+	st = index
+	ed = index + nword
+	while st > 0 and tokens[st]!='.' and index-st < lookahead:
+		st = st - 1
+	while ed<len(tokens) and tokens[ed]!='.' and ed - index < lookahead:
+		ed = ed + 1
+	snippet = ' '.join(tokens[st:ed])
+	if st!=0:
+		snippet = '... '+snippet
+	if ed!=len(tokens):
+		snippet = snippet+' ...'
+	return snippet
+
+def QueryNodeInfo(t,term2pid, DATA_DIR):
+	if t not in term2pid:
+		return '','',''
+	return ReadAbst(term2pid[t], t, DATA_DIR)
+
+def GetInfoBasedOnID(infos, ind):
+	if ind < 0:
+		ind = 0
+	if ind >= len(infos):
+		ind = len(infos) - 1
+	ttl, des, url = infos[ind]
+	#des = des[0:min(380,len(des))]
+	return ttl, des, url
+
+
+def ScoreAbst(term, title, abst):
+	if len(abst.split(' '))<3:
+		return 100000
+	sc_title = (term.lower() in title.lower()) * 1. / (len(title.split(' '))+1) * 10000
+	sc_abst = (term.lower() in abst.lower()) * 1.  / (len(abst.split(' '))+1)
+	return (sc_title + sc_abst)*-1
+
+def query_edge(path, DATA_DIR):
+	return path
+
+def ReadAbst(pids, term, DATA_DIR):
+	pid2sc = {}
+	#print (len(pids))=
+
+	abs_dir = DATA_DIR + '/abstract/'
+
+	pids = set(list(pids)[:min(11,len(pids))])
+	for file in os.listdir(abs_dir):
+		_,st,ed = file.split('_')
+		st = int(st)
+		ed = int(ed)
+		check = False
+		for pid in pids:
+			if st<=pid and ed>=pid:
+				check=True
+				break
+		#print (file,check)
+		if check:
+			fin = open(abs_dir+file)
+			for line in fin:
+				w = line.lower().strip().split('|')
+				if int(w[0]) in pids:
+					pid2sc['\t'.join([str(pid), w[1], w[2]])] = ScoreAbst(term, w[1], w[2])
+			fin.close()
+	pid2sc_sorted = sorted(pid2sc.items(), key=operator.itemgetter(1))
+
+	pids = []
+	ttls = []
+	absts = []
+	for i in range(min(10,len(pid2sc_sorted))):
+		pid, ttl, abst = pid2sc_sorted[i][0].split('\t')
+		#print (pid, ttl, abst,pid2sc_sorted[i][1])
+		pids.append(pid)
+		ttls.append(ttl)
+		absts.append(abst)
+	return pids, ttls, absts
+
+def query_node(term, info, term2pid, node2tp, DATA_DIR, ind = 0):
+	t1s,t2s,t3s = QueryNodeInfo(term, term2pid, DATA_DIR)
+	tmp = []
+	for ii in range(len(t3s)):
+		t3s[ii] = ExtractSnippt(term, t3s[ii])
+		t2s[ii] = ExtractSnippt(term, t2s[ii], lookahead=8)
+		if len(t2s[ii])>140:
+			t2s[ii] = t2s[ii][:140]
+		tmp.append([t2s[ii], t3s[ii],'https://www.ncbi.nlm.nih.gov/pubmed/'+t1s[ii]])
+	info[term] = tmp
+	#url = info[term][1]
+	ttl, des, url = GetInfoBasedOnID(info[term], ind)
+	print (ttl, des, url)
+	if node2tp[term]=='gene':
+		ttl = ttl.upper()
+	else:
+		ttl = ttl.capitalize()
+	if 'ncbi' in url:
+		ttl = ttl + ' - NCBI'
+	elif 'meshb' in url:
+		ttl = ttl + ' - MeSH'
+	elif 'genecards' in url:
+		ttl = ttl + ' - GeneCards'
+	elif 'geneontology' in url:
+		ttl = ttl + ' - GO'
+	elif 'drugbank' in url:
+		ttl = ttl + ' - DrugBank'
+	des = list(des)
+
+	for ii in range(len(des)):
+		if  (ii+2)<len(des) and des[ii]=='.' and des[ii+1]==' ' and des[ii+2]>='a' and des[ii+2]<='z':
+			des[ii+2] = des[ii+2].upper()
+	des = ''.join(des)
+	return info, ttl, des, url

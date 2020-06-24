@@ -18,25 +18,46 @@ args = parser.parse_args()
 DATA_DIR = args.data_dir
 print (DATA_DIR)
 
-query = {}
-query['disease']= args.disease.split(';')
-query['drug']=args.drug.split(';')
-query['gene']=args.gene.split(';')
-query['function']= args.function.split(';')
-print (query)
+try:
+	diffusion, diffusion_n2i, diffusion_i2n, networks, node2tp, tp2node, node2ct = read_server_data(DATA_DIR)
+	node_info, term2pid = read_node_info(DATA_DIR)
+except Exception as e:
+	exit('load database error '+str(e))
 
-diffusion, diffusion_n2i, diffusion_i2n, networks, node2tp, tp2node, node2ct = read_server_data(DATA_DIR)
+try:
+	query = {}
+	query['disease']= args.disease.lower().split(';')
+	query['drug']=args.drug.lower().split(';')
+	query['gene']=args.gene.lower().split(';')
+	query['function']= args.function.lower().split(';')
+	if not valid_query(query, tp2node):
+		raise ValueError('query cannot be empty')
+	query = remove_non_db_terms(query, tp2node)
+	print (query)
+except Exception as e:
+	exit('Query error '+str(e))
 
-for tp in query:
-	for w in query[tp]:
-		if w not in tp2node[tp]:
-			warnings.warn(w+' not in current '+tp+' list')
 #python run_deepsyn_fast.py --data_dir "DeepSyn/data/knowledge_network/" --drug "doxurbicin" --disease "breast cancer;lung cancer" --gene "top2a;kmt2a" --function "dna repair" --output_file "test.txt"
 
+try:
+	ans_paths, ans_nodes = run_query(query, networks, diffusion, diffusion_n2i, diffusion_i2n, node2tp, MAX_DEPTH = 4)
+except Exception as e:
+	exit('run query error '+str(e))
 
-ans_paths, ans_nodes = run_query(query, networks, diffusion, diffusion_n2i, diffusion_i2n, node2tp, MAX_DEPTH = 4)
-print (ans_paths)
-nx_obj = create_networkx_obj(ans_paths, ans_nodes, node2tp)
-write_to_cyto_scape(ans_paths, ans_nodes, node2tp, args.output_file)
 
-print (nx_obj)
+try:
+	for node in ans_nodes:
+		node_info, title, description, url = query_node(node, node_info, term2pid, node2tp, DATA_DIR)
+		print (node, title, description, url)
+	for path in ans_paths:
+		path_info = query_edge(path, DATA_DIR)
+		print (path, path_info)
+except Exception as e:
+	exit('retrieve node info error '+str(e))
+
+try:
+	nx_obj = create_networkx_obj(ans_paths, ans_nodes, node2tp)
+	write_to_cyto_scape(ans_paths, ans_nodes, node2tp, args.output_file)
+	print (nx_obj)
+except Exception as e:
+	exit('generate networkx file error '+str(e))
