@@ -14,7 +14,7 @@ Deep Functional Synthesis (DeepSyn) is function annotation tool that moves beyon
 *sheng Wang, Jianzhu Ma, Michael Ku Yu, Fan Zheng, Edward W. Huang, Jiawei Han, Jian Peng, Trey Ideker*.
 
 ## Dataset (update on 01/27/2020)
-We now provide an updated dataset for our fast implementation in this [dropbox link](https://www.dropbox.com/s/ubkh36hqe8qqki0/deepsyn_data.tar.gz?dl=0).
+We now provide an updated dataset for our fast implementation in this [dropbox link](https://www.dropbox.com/s/v294k14yvvz1za2/deepsyn_data_with_abstract.tar.gz?dl=0).
 Please download this data, extract all files (tar -zxvf deepsyn_data.tar.gz) and change the data fold location in [run_deepsyn_fast.py](https://github.com/wangshenguiuc/DeepSyn/blob/master/run_deepsyn_fast.py).
 
 ## How to run
