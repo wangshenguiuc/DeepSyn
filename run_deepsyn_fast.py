@@ -49,7 +49,7 @@ except Exception as e:
 try:
 	for node in ans_nodes:
 		node_id, node_info, title, description, url = query_node(node, node_info, term2pid, node2tp, DATA_DIR)
-		#print (node, title, description, url, node2id[node2tp[node]+'\t'+node])
+		print (node_id, title, description, url)
 	for path in ans_paths:
 		path_info = query_edge(path, DATA_DIR)
 		#print (path, path_info)
@@ -59,6 +59,6 @@ except Exception as e:
 try:
 	nx_obj = create_networkx_obj(ans_paths, ans_nodes, node2tp)
 	write_to_cyto_scape(ans_paths, ans_nodes, node2tp, args.output_file)
-	print (nx_obj)
+	#print (nx_obj)
 except Exception as e:
 	exit('generate networkx file error '+str(e))

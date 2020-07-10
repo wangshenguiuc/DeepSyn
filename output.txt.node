@@ -1,20 +1,19 @@
 node	type
-weight loss	function
-peristalsis	function
-maternal body weight	function
+tp53	gene
+multifactorial inheritance	function
 adams-oliver syndrome	disease
-alx1	gene
-myelomeningocele	disease
+fuz	gene
+weight loss	function
+neural tube closure	function
+maternal body weight	function
+ocular coloboma	disease
+oligogenic inheritance	disease
+peristalsis	function
+omphalocele	disease
+perry syndrome	disease
+polygenic inheritance	disease
 decreased appetite	disease
 gastrointestinal obstruction	disease
-multifactorial inheritance	function
 digenic inheritance	disease
-oligogenic inheritance	disease
-polygenic inheritance	disease
-dna binding	function
-neural tube closure	function
+establishment of protein localization	function
 cloacal exstrophy	disease
-perry syndrome	disease
-ocular coloboma	disease
-tp53	gene
-maternal toxicity	function
