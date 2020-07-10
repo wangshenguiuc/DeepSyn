@@ -364,7 +364,8 @@ def GetInfoBasedOnID(infos, ind):
 	return ttl, des, url
 
 def GetNodeId(node, node2tp):
-	return node2tp[node]+'\t'+node
+	name = node2tp[node][:2]+'_'+node.replace(' ','_')
+	return name
 
 def ScoreAbst(term, title, abst):
 	if len(abst.split(' '))<3:
