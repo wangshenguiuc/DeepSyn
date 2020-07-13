@@ -37,10 +37,10 @@ def valid_query(query, tp2node):
 def create_networkx_obj(paths, nodes, node2tp):
 	G = nx.DiGraph()
 	for node in nodes:
-		G.add_node(node, type=node2tp[node])
+		G.add_node(GetNodeId(node, node2tp), type=node2tp[node])
 	for path in paths:
 		e1,e2,tp = path.split('\t')
-		G.add_edge(e1, e2, type=tp)
+		G.add_edge(GetNodeId(e1, node2tp), GetNodeId(e2, node2tp), type=tp)
 	return G
 
 def write_to_cyto_scape(paths, nodes, node2tp, output_file):
@@ -298,7 +298,7 @@ def run_query(query, networks, diffusion, diffusion_n2i, diffusion_i2n, node2tp,
 		nodes.add(w2)
 	return paths, nodes
 
-def read_node_info(DATA_DIR):
+def read_node_info(DATA_DIR, tp2node):
 
 	fin = open(DATA_DIR+'/node_info.txt')
 	info = {}
@@ -312,7 +312,14 @@ def read_node_info(DATA_DIR):
 
 	with open(DATA_DIR+'/pid2term.pickle', 'rb') as handle:
 	    term2pid = pickle.load(handle)
-
+	'''
+	nodes = []
+	for tp in tp2node:
+		for node in tp2node[tp]:
+			nodes.append(tp+'\t'+node)
+	node2id = dict(zip(nodes, range(len(nodes))))
+	id2node = dict(zip(range(len(nodes)), nodes))
+	'''
 	return info, term2pid
 
 
@@ -356,6 +363,9 @@ def GetInfoBasedOnID(infos, ind):
 	#des = des[0:min(380,len(des))]
 	return ttl, des, url
 
+def GetNodeId(node, node2tp):
+	name = node2tp[node][:2]+'_'+node.replace(' ','_')
+	return name
 
 def ScoreAbst(term, title, abst):
 	if len(abst.split(' '))<3:
@@ -437,4 +447,4 @@ def query_node(term, info, term2pid, node2tp, DATA_DIR, ind = 0):
 		if  (ii+2)<len(des) and des[ii]=='.' and des[ii+1]==' ' and des[ii+2]>='a' and des[ii+2]<='z':
 			des[ii+2] = des[ii+2].upper()
 	des = ''.join(des)
-	return info, ttl, des, url
+	return GetNodeId(term, node2tp), info, ttl, des, url

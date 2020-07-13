@@ -20,7 +20,8 @@ print (DATA_DIR)
 
 try:
 	diffusion, diffusion_n2i, diffusion_i2n, networks, node2tp, tp2node, node2ct = read_server_data(DATA_DIR)
-	node_info, term2pid = read_node_info(DATA_DIR)
+	node_info, term2pid = read_node_info(DATA_DIR, tp2node)
+
 except Exception as e:
 	exit('load database error '+str(e))
 
@@ -47,17 +48,17 @@ except Exception as e:
 
 try:
 	for node in ans_nodes:
-		node_info, title, description, url = query_node(node, node_info, term2pid, node2tp, DATA_DIR)
-		print (node, title, description, url)
+		node_id, node_info, title, description, url = query_node(node, node_info, term2pid, node2tp, DATA_DIR)
+		print (node_id, title, description, url)
 	for path in ans_paths:
 		path_info = query_edge(path, DATA_DIR)
-		print (path, path_info)
+		#print (path, path_info)
 except Exception as e:
 	exit('retrieve node info error '+str(e))
 
 try:
 	nx_obj = create_networkx_obj(ans_paths, ans_nodes, node2tp)
 	write_to_cyto_scape(ans_paths, ans_nodes, node2tp, args.output_file)
-	print (nx_obj)
+	#print (nx_obj)
 except Exception as e:
 	exit('generate networkx file error '+str(e))
