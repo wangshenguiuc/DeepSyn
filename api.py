@@ -13,8 +13,13 @@ localConfig = config['DeepSyn']
 DATA_DIR = localConfig['data_dir']
 REST_PORT = localConfig['port']
 
-diffusion, diffusion_n2i, diffusion_i2n, networks, node2tp, tp2node, node2ct = read_server_data(DATA_DIR)
-node_info, term2pid = read_node_info(DATA_DIR)
+try:
+	diffusion, diffusion_n2i, diffusion_i2n, networks, node2tp, tp2node, node2ct = read_server_data(DATA_DIR)
+	node_info, term2pid = read_node_info(DATA_DIR, tp2node)
+
+except Exception as e:
+	exit('load database error '+str(e))
+
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -47,8 +52,8 @@ def query_nodes():
     nodes = node_str.split(',')
     result = []
     for node in nodes:
-        node_info_tmp, title, description, url = query_node(node, node_info, term2pid, node2tp, DATA_DIR)
-        n_holder = {'id': node, 'title': title, 'description': description, 'url': url}
+        node_id, node_info_tmp, title, description, url = query_node(node, node_info, term2pid, node2tp, DATA_DIR)
+        n_holder = {'id': node_id, 'title': title, 'description': description, 'url': url}
         result.append(n_holder)
     return jsonify(result)
 
