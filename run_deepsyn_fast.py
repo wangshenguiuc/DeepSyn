@@ -47,9 +47,9 @@ except Exception as e:
 
 
 try:
-	for node in ans_nodes:
-		node_id, node_info, title, description, url = query_node(node, node_info, term2pid, node2tp, DATA_DIR)
-		print (node_id, title, description, url)
+	for node_id in ans_nodes:
+		node_id, node_name, node_info, title, description, url = query_node(node_id, node_info, term2pid, node2tp, DATA_DIR)
+		#print (node_id, title, description, url)
 	for path in ans_paths:
 		path_info = query_edge(path, DATA_DIR)
 		#print (path, path_info)

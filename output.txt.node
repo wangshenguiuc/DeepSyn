@@ -1,19 +1,19 @@
 node	type
-tp53	gene
-multifactorial inheritance	function
-adams-oliver syndrome	disease
-fuz	gene
-weight loss	function
-neural tube closure	function
-maternal body weight	function
-ocular coloboma	disease
-oligogenic inheritance	disease
-peristalsis	function
-omphalocele	disease
-perry syndrome	disease
-polygenic inheritance	disease
-decreased appetite	disease
-gastrointestinal obstruction	disease
-digenic inheritance	disease
-establishment of protein localization	function
-cloacal exstrophy	disease
+di_adams-oliver_syndrome	disease
+di_perry_syndrome	disease
+ge_kat2a	gene
+fu_gastric_emptying	function
+di_decreased_appetite	disease
+fu_neural_tube_closure	function
+di_gastrointestinal_obstruction	disease
+ge_tp53	gene
+di_cloacal_exstrophy	disease
+di_polygenic_inheritance	disease
+fu_somite_development	function
+fu_maternal_body_weight	function
+di_oligogenic_inheritance	disease
+di_digenic_inheritance	disease
+di_ocular_coloboma	disease
+fu_multifactorial_inheritance	function
+di_esophageal_atresia	disease
+fu_weight_loss	function
