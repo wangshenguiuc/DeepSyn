@@ -37,10 +37,10 @@ def valid_query(query, tp2node):
 def create_networkx_obj(paths, nodes, node2tp):
 	G = nx.DiGraph()
 	for node in nodes:
-		G.add_node(GetNodeId(node, node2tp), type=node2tp[node])
+		G.add_node(node, type=node2tp[GetNodeName(node)])
 	for path in paths:
 		e1,e2,tp = path.split('\t')
-		G.add_edge(GetNodeId(e1, node2tp), GetNodeId(e2, node2tp), type=tp)
+		G.add_edge(e1, e2 , type=tp)
 	return G
 
 def write_to_cyto_scape(paths, nodes, node2tp, output_file):
@@ -54,7 +54,7 @@ def write_to_cyto_scape(paths, nodes, node2tp, output_file):
 	fout = open(output_file+'.node','w')
 	fout.write('node\ttype\n')
 	for n in nodes:
-		fout.write(n+'\t'+node2tp[n]+'\n')
+		fout.write(n+'\t'+node2tp[GetNodeName(n)]+'\n')
 	fout.close()
 
 def extract_network(net_obj, ki, kj):
@@ -277,14 +277,19 @@ def run_query(query, networks, diffusion, diffusion_n2i, diffusion_i2n, node2tp,
 		kj = layer_keys[i+1]
 
 		if ki=='drug' or ki=='gene':
-			layer_paths, next_layer_terms = forward_search(dk, ki, kj, org_query, query, networks[ki][kj], networks[ki][dk], networks[dk][kj], diffusion, diffusion_n2i, diffusion_i2n, node2tp, MAX_DEPTH, NNODES_PER_LAYER, NNODES_PER_QUERY)
+			old_layer_paths, next_layer_terms = forward_search(dk, ki, kj, org_query, query, networks[ki][kj], networks[ki][dk], networks[dk][kj], diffusion, diffusion_n2i, diffusion_i2n, node2tp, MAX_DEPTH, NNODES_PER_LAYER, NNODES_PER_QUERY)
+			layer_paths = set()
+			for p in old_layer_paths:
+				w1,w2,tp=p.split('\t')
+				layer_paths.add(GetNodeId(w1, node2tp)+'\t'+GetNodeId(w2, node2tp)+'\t'+tp)
 		else:
 			#ki function, kj disease
 			rev_layer_paths, next_layer_terms = forward_search(dk, kj, ki, org_query, query, networks[ki][kj], networks[dk][kj], networks[ki][dk], diffusion, diffusion_n2i, diffusion_i2n, node2tp, MAX_DEPTH, NNODES_PER_LAYER, NNODES_PER_QUERY)
 			layer_paths = set()
 			for p in rev_layer_paths:
 				w1,w2,tp=p.split('\t')
-				layer_paths.add(w2+'\t'+w1+'\t'+tp)
+				layer_paths.add(GetNodeId(w2, node2tp)+'\t'+GetNodeId(w1, node2tp)+'\t'+tp)
+
 		paths = paths | layer_paths
 		query[kj].extend(list(next_layer_terms))
 		query[kj] = list(np.unique(query[kj]))
@@ -367,6 +372,10 @@ def GetNodeId(node, node2tp):
 	name = node2tp[node][:2]+'_'+node.replace(' ','_')
 	return name
 
+def GetNodeName(name):
+	name = ' '.join(name.split('_')[1:])
+	return name
+
 def ScoreAbst(term, title, abst):
 	if len(abst.split(' '))<3:
 		return 100000
@@ -375,7 +384,8 @@ def ScoreAbst(term, title, abst):
 	return (sc_title + sc_abst)*-1
 
 def query_edge(path, DATA_DIR):
-	return path
+	tp = path.split('\t')[2]
+	return tp
 
 def ReadAbst(pids, term, DATA_DIR):
 	pid2sc = {}
@@ -415,6 +425,7 @@ def ReadAbst(pids, term, DATA_DIR):
 	return pids, ttls, absts
 
 def query_node(term, info, term2pid, node2tp, DATA_DIR, ind = 0):
+	term = GetNodeName(term)
 	t1s,t2s,t3s = QueryNodeInfo(term, term2pid, DATA_DIR)
 	tmp = []
 	for ii in range(len(t3s)):
@@ -426,7 +437,7 @@ def query_node(term, info, term2pid, node2tp, DATA_DIR, ind = 0):
 	info[term] = tmp
 	#url = info[term][1]
 	ttl, des, url = GetInfoBasedOnID(info[term], ind)
-	print (ttl, des, url)
+	#print (ttl, des, url)
 	if node2tp[term]=='gene':
 		ttl = ttl.upper()
 	else:
@@ -447,4 +458,4 @@ def query_node(term, info, term2pid, node2tp, DATA_DIR, ind = 0):
 		if  (ii+2)<len(des) and des[ii]=='.' and des[ii+1]==' ' and des[ii+2]>='a' and des[ii+2]<='z':
 			des[ii+2] = des[ii+2].upper()
 	des = ''.join(des)
-	return GetNodeId(term, node2tp), info, ttl, des, url
+	return GetNodeId(term, node2tp), term, info, ttl, des, url
